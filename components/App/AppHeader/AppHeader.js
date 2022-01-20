@@ -3,40 +3,41 @@ import React, {
   useEffect,
 } from "react"
 
+import Link from "next/link"
+
 import {
   Header,
-  HeaderLogo,
-  HeaderLink,
-  // Container,
-  // Container,
+  HeaderMenu,
 } from "./AppHeader.styles"
 
 const AppHeader = () => {
 
-  const [isActive, setIsActive] = useState(false)
+  const [isHidden, setIsHidden] = useState(false)
   const [scrollY, setScrollY] = useState(0)
 
   const onScroll = () => {
     setScrollY(window.pageYOffset)
 
     window.pageYOffset > scrollY
-    ? setIsActive(true)
-    : setIsActive(false)
+    ? setIsHidden(true)
+    : setIsHidden(false)
   }
 
   useEffect(() => {
-    const watchScroll = () => {
-      window.addEventListener("scroll", onScroll)
-    }
-    watchScroll();
+    window.addEventListener('scroll', onScroll);
+
     return () => {
-      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener('scroll', onScroll);
     }
   })
 
   return (
-    <Header isActive={isActive}>
-      <a>AppHeader</a>
+    <Header isHidden={isHidden}>
+      <Link href="/">Logo</Link>
+
+      <HeaderMenu>
+        <Link href="/blog">Blog</Link>
+      </HeaderMenu>
     </Header>
   )
 }
