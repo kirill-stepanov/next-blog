@@ -2,10 +2,14 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   width: 90%;
-  margin: 65px auto;
+  margin: 65px auto 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 50px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `
 
 export const ContainerImage = styled.img`

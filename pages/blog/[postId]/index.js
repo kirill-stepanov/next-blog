@@ -5,6 +5,7 @@ import Head from "next/head"
 import axios from 'axios'
 
 import PostHeader from "../../../components/Post/PostHeader/PostHeader"
+import PostContent from "../../../components/Post/PostContent/PostContent"
 
 const PostPage = (props) => {
   const { post } = props
@@ -18,6 +19,7 @@ const PostPage = (props) => {
       </Head>
 
       <PostHeader post={post} />
+      <PostContent content={post.attributes.content} />
     </div>
   )
 }
@@ -28,7 +30,7 @@ export const getServerSideProps = async ({ query }) => {
   let post = null
 
   try {
-    await axios.get(`https://strapi-n-blog.herokuapp.com/api/articles?populate=image,content`)
+    await axios.get(`https://strapi-n-blog.herokuapp.com/api/articles?populate=image,content,content.gallery`)
     .then(res => articles = res.data.data)
   } catch (error) {
     console.log(error)
