@@ -3,14 +3,19 @@ import React, {
   useEffect,
 } from "react"
 
+import { useRouter } from "next/router"
+
 import Link from "next/link"
 
 import {
   Header,
   HeaderMenu,
+  HeaderMenuList,
+  HeaderMenuListItem,
 } from "./AppHeader.styles"
 
 const AppHeader = () => {
+  const router = useRouter()
 
   const [isHidden, setIsHidden] = useState(false)
   const [scrollY, setScrollY] = useState(0)
@@ -36,7 +41,15 @@ const AppHeader = () => {
       <Link href="/">Logo</Link>
 
       <HeaderMenu>
-        <Link href="/blog">Blog</Link>
+        <HeaderMenuList>
+          <HeaderMenuListItem isActive={router.pathname === '/'}>
+            <Link href="/">Home</Link>
+          </HeaderMenuListItem>
+
+          <HeaderMenuListItem isActive={router.pathname === '/blog'}>
+            <Link href="/blog">Blog</Link>
+          </HeaderMenuListItem>
+        </HeaderMenuList>
       </HeaderMenu>
     </Header>
   )
